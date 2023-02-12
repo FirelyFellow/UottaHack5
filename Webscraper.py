@@ -1,12 +1,12 @@
 from bs4 import BeautifulSoup
 import requests
-
-HEADERS = ({'User-Agent':
-            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) \
-            AppleWebKit/537.36 (KHTML, like Gecko) \
-            Chrome/90.0.4430.212 Safari/537.36',
-            'Accept-Language': 'en-US, en;q=0.5'})
   
+HEADERS = ({'User-Agent':
+                'Mozilla/5.0 (Windows NT 10.0; Win64; x64) \
+                AppleWebKit/537.36 (KHTML, like Gecko) \
+                Chrome/90.0.4430.212 Safari/537.36',
+                'Accept-Language': 'en-US, en;q=0.5'})
+
 # user define function
 # Scrape the data
 def getdata(url):
@@ -22,35 +22,38 @@ def html_code(url):
   
     # display html code
     return (soup)
-  
-url = "https://www.amazon.ca/Apple-MLWK3AM-A-New-AirPods/product-reviews/B09JQMJHXY/ref=cm_cr_dp_d_show_all_btm?ie=UTF8&reviewerType=all_reviews"
-  
-soup = html_code(url)
-
-alist = list()
 
 def cus_rev(soup):
+    alist = list()
     data_str = ""
   
     for items in soup.find_all("div", class_="a-row a-spacing-small review-data"):
         alist.append(items)
     print(len(alist))
-    return(alist)
+    return(alist)  
 
-rev_data = cus_rev(soup)
-rev_result = []
-for i in rev_data:
-    if i is "":
-        pass
-    else:
-        rev_result.append(i)
-rev_result
+def scrape(product):
+    url = "https://www.amazon.ca/Apple-MLWK3AM-A-New-AirPods/product-reviews/B09JQMJHXY/ref=cm_cr_dp_d_show_all_btm?ie=UTF8&reviewerType=all_reviews"
+    
+    soup = html_code(url)
+    #print(soup)
 
-for x in range(2,10):
-    soup = html_code(f'https://www.amazon.ca/Apple-MLWK3AM-A-New-AirPods/product-reviews/B09JQMJHXY/ref=cm_cr_getr_d_paging_btm_prev_1?ie=UTF8&reviewerType=all_reviews&pageNumber={x}')
-    print(f'Getting page: {x}')
-    cus_rev(soup)    
-    print(len(alist))
+    rev_data = cus_rev(soup)
+    rev_result = []
+    for i in rev_data:
+        if i is "":
+            pass
+        else:
+            rev_result.append(i)
+
+    #print("web_scraper:{}".format(rev_result))
+    
+    for x in range(2,10):
+        soup = html_code(f'https://www.amazon.ca/Apple-MLWK3AM-A-New-AirPods/product-reviews/B09JQMJHXY/ref=cm_cr_getr_d_paging_btm_prev_1?ie=UTF8&reviewerType=all_reviews&pageNumber={x}')
+        print(f'Getting page: {x}')
+        cus_rev(soup)    
+    return rev_result
+
 
 
     
