@@ -32,15 +32,15 @@ def cus_rev(soup):
     print(len(alist))
     return(alist)  
 
-def scrape(product):
-    url = "https://www.amazon.ca/Apple-MLWK3AM-A-New-AirPods/product-reviews/B09JQMJHXY/ref=cm_cr_dp_d_show_all_btm?ie=UTF8&reviewerType=all_reviews"
+def scrape(product_url):
+    #url = "https://www.amazon.ca/Apple-MLWK3AM-A-New-AirPods/product-reviews/B09JQMJHXY/ref=cm_cr_dp_d_show_all_btm?ie=UTF8&reviewerType=all_reviews"
     
-    soup = html_code(url)
+    soup = html_code(product_url)
     #print(soup)
 
-    for x in range(2,10):
+    for x in range(1,10):
         if x != 1:
-            soup = html_code(f'https://www.amazon.ca/Apple-MLWK3AM-A-New-AirPods/product-reviews/B09JQMJHXY/ref=cm_cr_getr_d_paging_btm_prev_1?ie=UTF8&reviewerType=all_reviews&pageNumber={x}')
+            soup = html_code(f'{product_url}&pageNumber={x}')
         
 
         rev_data = cus_rev(soup)

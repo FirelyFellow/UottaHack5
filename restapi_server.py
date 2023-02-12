@@ -18,10 +18,7 @@ def add_message():
 
     if request.method == 'POST':
         data = request.data.decode()
-        messages["EAT ASS BITCH"] = GPT_API.get_summary(Webscraper.scrape(data))
-
-
-        
+        messages["summary"] = GPT_API.get_summary(Webscraper.scrape(data))
 
     resp = make_response(jsonify(messages), 200)
 
