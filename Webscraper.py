@@ -1,12 +1,12 @@
 from bs4 import BeautifulSoup
 import requests
-
-HEADERS = ({'User-Agent':
-            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) \
-            AppleWebKit/537.36 (KHTML, like Gecko) \
-            Chrome/90.0.4430.212 Safari/537.36',
-            'Accept-Language': 'en-US, en;q=0.5'})
   
+HEADERS = ({'User-Agent':
+                'Mozilla/5.0 (Windows NT 10.0; Win64; x64) \
+                AppleWebKit/537.36 (KHTML, like Gecko) \
+                Chrome/90.0.4430.212 Safari/537.36',
+                'Accept-Language': 'en-US, en;q=0.5'})
+
 # user define function
 # Scrape the data
 def getdata(url):
@@ -22,13 +22,8 @@ def html_code(url):
   
     # display html code
     return (soup)
-  
-url = "https://www.amazon.ca/Apple-MLWK3AM-A-New-AirPods/product-reviews/B09JQMJHXY/ref=cm_cr_dp_d_show_all_btm?ie=UTF8&reviewerType=all_reviews"
-  
-soup = html_code(url)
-#print(soup)
 
-    
+
 def cus_rev(soup):
     # find the Html tag
     # with find()
@@ -45,16 +40,25 @@ def cus_rev(soup):
        # result_1 = data_str_1.split("\n")
     #result = data_str.split("\n")
     print(len(alist))
-    return(alist)
+    return(alist)  
 
-rev_data = cus_rev(soup)
-rev_result = []
-for i in rev_data:
-    if i is "":
-        pass
-    else:
-        rev_result.append(i)
-rev_result
+def scrape(product):
+    url = "https://www.amazon.ca/Apple-MLWK3AM-A-New-AirPods/product-reviews/B09JQMJHXY/ref=cm_cr_dp_d_show_all_btm?ie=UTF8&reviewerType=all_reviews"
+    
+    soup = html_code(url)
+    #print(soup)
+
+    rev_data = cus_rev(soup)
+    rev_result = []
+    for i in rev_data:
+        if i is "":
+            pass
+        else:
+            rev_result.append(i)
+
+    #print("web_scraper:{}".format(rev_result))
+
+    return rev_result
 #print(rev_result)
 
 #headline = div.h2.text
