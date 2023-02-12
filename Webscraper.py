@@ -38,13 +38,13 @@ def scrape(product_url):
     soup = html_code(product_url)
     #print(soup)
 
+    rev_result = []
     for x in range(1,10):
         if x != 1:
             soup = html_code(f'{product_url}&pageNumber={x}')
         
 
         rev_data = cus_rev(soup)
-        rev_result = []
         for i in rev_data:
             if i is "":
                 pass
