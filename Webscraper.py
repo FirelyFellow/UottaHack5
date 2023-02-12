@@ -38,20 +38,25 @@ def scrape(product):
     soup = html_code(url)
     #print(soup)
 
-    rev_data = cus_rev(soup)
-    rev_result = []
-    for i in rev_data:
-        if i is "":
-            pass
-        else:
-            rev_result.append(i)
+    for x in range(2,10):
+        if x != 1:
+            soup = html_code(f'https://www.amazon.ca/Apple-MLWK3AM-A-New-AirPods/product-reviews/B09JQMJHXY/ref=cm_cr_getr_d_paging_btm_prev_1?ie=UTF8&reviewerType=all_reviews&pageNumber={x}')
+        
+
+        rev_data = cus_rev(soup)
+        rev_result = []
+        for i in rev_data:
+            if i is "":
+                pass
+            else:
+                rev_result.append(i)
 
     #print("web_scraper:{}".format(rev_result))
     
-    for x in range(2,10):
-        soup = html_code(f'https://www.amazon.ca/Apple-MLWK3AM-A-New-AirPods/product-reviews/B09JQMJHXY/ref=cm_cr_getr_d_paging_btm_prev_1?ie=UTF8&reviewerType=all_reviews&pageNumber={x}')
-        print(f'Getting page: {x}')
-        cus_rev(soup)    
+    # for x in range(2,10):
+        
+    #     print(f'Getting page: {x}')
+    #     cus_rev(soup)    
     return rev_result
 
 
